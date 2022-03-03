@@ -1,24 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import { Grommet } from "grommet";
+import { hpe } from 'grommet-theme-hpe';
+import AppLayout from "./components/AppLayout";
+import SelectionSteps from "./pages/SelectionSteps";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet theme={hpe} themeMode="light" full>
+      <AppLayout>
+        <SelectionSteps title="Please select at least one shape..." next="You can now proceed to the next selection." />
+      </AppLayout>
+    </Grommet>
   );
 }
 
