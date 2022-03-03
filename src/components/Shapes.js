@@ -18,7 +18,7 @@ const Shapes = ({ type, shapes, isLoading, error, handleClick }) => {
     const retrieveComponent = (shape) => {
         switch (shape.component) {
             case 'Star':
-                return <Star key={shape.id} handleClick={() => handleClick(type, shape)} color={shape.color} />
+                return <Star key={shape.id} onClick={() => handleClick(type, shape)} color={shape.color} />
             case 'Hexagon':
                 return <Hexagon key={shape.id} onClick={() => handleClick(type, shape)} color={shape.color} />
             case 'Minus':

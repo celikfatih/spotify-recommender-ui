@@ -20,9 +20,9 @@ const SelectionSteps = ({ title, next }) => {
     }
 
     const handleClick = (input, value) => {
-        setStepInfo({ ...stepInfo, [input]: (stepInfo[input].indexOf(value) === -1 ? [...stepInfo[input], value] : [...stepInfo[input]]) });
+        setStepInfo({ ...stepInfo, [input]: (stepInfo[input].indexOf(value) === -1 ? [...stepInfo[input], value] : [...stepInfo[input].filter(v => v !== value)]) });
         setShowNext(true);
-        console.log(stepInfo);
+        console.log('steps', stepInfo);
     }
 
     const currentStep = (step) => {
