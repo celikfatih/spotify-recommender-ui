@@ -11,7 +11,7 @@ When you make a selection, the shape you have selected will turn black and a but
 
 <img alt="shapes" src="https://i.ibb.co/WsvgWgp/how-it-works-shapes.gif" width="430px"/>
 
-If you want to cancel your selection, simply tap on it again. When you click/tap the active button, a
+If you want to cancel your selection, simply tap on it again. When you click/tap the active button, 
 You will have passed to the next stage. At this stage, you will repeat what was done in the previous step, and after the last step
 You will reach the page where there are three song suggestions prepared based on the colors and geometric shapes you have chosen.
 

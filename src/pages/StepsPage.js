@@ -23,7 +23,7 @@ const StepsPage = ({ title, next }) => {
 
     const handleClick = (input, value) => {
         setStepInfo({ ...stepInfo, [input]: (stepInfo[input].indexOf(value) === -1 ? [...stepInfo[input], value] : [...stepInfo[input].filter(v => v !== value)]) });
-        setShowNext(!showNext);
+        setShowNext(true);
     }
 
     const currentStep = (step) => {
