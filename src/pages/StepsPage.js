@@ -1,11 +1,12 @@
-import { Box, Button, Grid, ResponsiveContext, Text } from "grommet";
+import { Box, Button, Grid, ResponsiveContext } from "grommet";
 import React, { useContext, useState } from "react";
 import Message from "../components/Message";
 import ArtistSelectionPage from "./ArtistSelectionPage";
 import GenreSelectionPage from "./GenreSelectionPage";
+import RecommendationPage from "./RecommendationPage";
 import TrackSelectionPage from "./TrackSelectionPage";
 
-const SelectionSteps = ({ title, next }) => {
+const StepsPage = ({ title, next }) => {
     const size = useContext(ResponsiveContext);
     const [showNext, setShowNext] = useState(false);
     const [stepInfo, setStepInfo] = useState({
@@ -17,26 +18,24 @@ const SelectionSteps = ({ title, next }) => {
 
     const nextStep = () => {
         setStepInfo({ ...stepInfo, step: stepInfo.step + 1 });
+        setShowNext(!showNext);
     }
 
     const handleClick = (input, value) => {
         setStepInfo({ ...stepInfo, [input]: (stepInfo[input].indexOf(value) === -1 ? [...stepInfo[input], value] : [...stepInfo[input].filter(v => v !== value)]) });
-        setShowNext(true);
-        console.log('steps', stepInfo);
+        setShowNext(!showNext);
     }
 
     const currentStep = (step) => {
         switch (step) {
             case 1:
-                return <ArtistSelectionPage showNext={setShowNext} handleClick={handleClick} />
+                return <ArtistSelectionPage handleClick={handleClick} />
             case 2:
-                return <GenreSelectionPage showNext={setShowNext} handleClick={handleClick} />
+                return <GenreSelectionPage handleClick={handleClick} />
             case 3:
-                return <TrackSelectionPage showNext={setShowNext} handleClick={handleClick} />
-            case 4:
-                return <Text>{JSON.stringify(stepInfo)}</Text>
+                return <TrackSelectionPage handleClick={handleClick} />
             default:
-            // nothing
+                return <RecommendationPage stepInfo={stepInfo} />
         }
     }
 
@@ -45,7 +44,7 @@ const SelectionSteps = ({ title, next }) => {
             <Grid
                 align="center"
                 justify="center"
-                rows={['xsmall', 'small'].includes(size) ? ['xsmall', 'xsmall', 'xsmall'] : ['small', 'small', 'small']}
+                rows={['xsmall', 'small'].includes(size) ? ['xsmall', 'small', 'xsmall'] : ['small', 'small', 'small']}
                 columns={{ size: 'auto' }}
                 areas={[
                     ['title'],
@@ -58,7 +57,7 @@ const SelectionSteps = ({ title, next }) => {
                     justify="center"
                     pad="small"
                 >
-                    <Message message={title}></Message>
+                    <Message message={stepInfo.step === 4 ? 'Here it\'s tracks for you 😎' : title}></Message>
                 </Box>
                 <Box
                     gridArea="shapes"
@@ -72,7 +71,7 @@ const SelectionSteps = ({ title, next }) => {
                     justify="center"
                     pad="small"
                 >
-                    {showNext && (<Box direction="column">
+                    {showNext && stepInfo.step !== 4 && (<Box direction="column">
                         <Message message={next}></Message>
                         <Box pad="small">
                             <Button size="large" margin={{ horizontal: 'auto' }} primary label="Go ➡️" onClick={() => { nextStep() }}></Button>
@@ -84,4 +83,4 @@ const SelectionSteps = ({ title, next }) => {
     )
 }
 
-export default SelectionSteps;
+export default StepsPage;
